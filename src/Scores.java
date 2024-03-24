@@ -14,7 +14,10 @@ public class Scores {
         Scanner scnr = new Scanner(numbers);
         scnr.useDelimiter(" ");
         nums = new ArrayList<>();
-        for(int i=0; i<numbers.length(); i++){
+        if(!scnr.hasNextInt()){
+           throw new IllegalArgumentException();
+        }
+        while(scnr.hasNextInt()){
             nums.add(scnr.nextInt());
         }
     }
@@ -28,7 +31,12 @@ public class Scores {
      * @param index An integer index in the range [0, getNumScores())
      * @return The score at the specified index. For example, the first score in the String is at index 0.
      */
-    public int get(int index) { return nums.get(index); }
+    public int get(int index) {
+        if(index>=nums.size()||index<0){
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return nums.get(index);
+    }
 
     /**
      * @return the maximum score stored in this object

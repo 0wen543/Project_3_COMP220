@@ -13,7 +13,7 @@ public class ScoresTest {
         final String doubles = "0.45 22.22 3.67";
         int exceptCount=0;
         try{
-        Scores aTest = new Scores(doubles);
+        Scores test = new Scores(doubles);
         }catch (IllegalArgumentException e){
         exceptCount++;
         }
@@ -21,53 +21,91 @@ public class ScoresTest {
     }
 
     @Test
+    public void numScoreTest(){
+        final String nums="6 3 87 12 65 53";
+
+        Scores test = new Scores(nums);
+
+        assertEquals(6,test.getNumScores());
+    }
+
+    @Test
+    public void wordsTest(){
+        final String words="This test is interesting";
+        int exceptCount=0;
+        try{
+            Scores test = new Scores(words);
+        }
+        catch(IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1,exceptCount);
+    }
+
+    @Test
+    public void getTest(){
+        final String nums ="4 5 6 7 7";
+
+        Scores test = new Scores(nums);
+
+        assertEquals(6, test.get(2));
+    }
+
+    @Test
     public void negativeTest(){
         final String negatives ="-4 -25 -87";
 
-        Scores bTest = new Scores(negatives);
-        assertEquals(3,bTest.getNumScores());
+        Scores test = new Scores(negatives);
+        assertEquals(3,test.getNumScores());
     }
 
     @Test
     public void nothingTest(){
-        final String nothing = "";
-
-        Scores cTest = new Scores(nothing);
-        assertEquals(0,cTest.getNumScores());
+        final String nothing = " ";
+        Scores test = new Scores(nothing);
+        assertEquals(1,test.getNumScores());
     }
 
     @Test
-    public void zeroTest(){
-        final String zeros = "0 0 0 0 0 0 0 0";
-
-        Scores dTest = new Scores(zeros);
-        assertEquals(0,dTest.getNumScores());
-    }
-
-    @Test
-    public void bigTest(){
+    public void nonSpacedTest(){
         final String noSpaces = "43568346176437014389690";
-
-        Scores eTest = new Scores(noSpaces);
-        assertEquals(1,eTest.getNumScores());
+        int exceptCount=0;
+        try {
+            Scores test = new Scores(noSpaces);
+        }
+        catch(IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1,exceptCount);
     }
 
     @Test
     public void outOfBoundTest(){
         final String outOfBound = "2 3";
         int exceptCount=0;
-        Scores fTest = new Scores(outOfBound);
+        Scores test = new Scores(outOfBound);
         try{
-            fTest.get(8);
+            test.get(8);
         }catch(ArrayIndexOutOfBoundsException e){
             exceptCount++;
         }
         try{
-            fTest.get(-1);
+            test.get(-1);
         }catch (ArrayIndexOutOfBoundsException e){
             exceptCount++;
         }
         assertEquals(2,exceptCount);
+    }
+    @Test
+    public void dashes(){
+        final String dashed = "4-8-132";
+        int exceptCount=0;
+        try{
+            Scores test = new Scores(dashed);
+        }catch (IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1,exceptCount);
     }
 
 
@@ -75,28 +113,28 @@ public class ScoresTest {
      * getMax() tests
      */
     @Test
-    public void maxTest(){
+    public void sameTest(){
         final String same ="4 4 4 4";
 
-        Scores gTest = new Scores(same);
-        assertEquals(4,gTest.getMax());
+        Scores test = new Scores(same);
+        assertEquals(4,test.getMax());
     }
 
     @Test
     public void negativeMaxTest(){
         final String negatives="-32 4 6 7";
 
-        Scores hTest = new Scores(negatives);
-        assertEquals(7,hTest.getMax());
+        Scores test = new Scores(negatives);
+        assertEquals(7,test.getMax());
     }
 
     @Test
     public void emptyTest(){
         final String blank=" ";
         int exceptCount=0;
-        Scores iTest = new Scores(blank);
+        Scores test = new Scores(blank);
         try{
-            iTest.getMax();
+            test.getMax();
         }catch (NoSuchElementException e){
             exceptCount++;
         }
