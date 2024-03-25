@@ -13,7 +13,19 @@ public class Scores {
     public Scores(String numbers) throws IllegalArgumentException {
         Scanner scnr = new Scanner(numbers);
         scnr.useDelimiter(" ");
+
         nums = new ArrayList<>();
+//        while(scnr.hasNext()){
+//            int lineCount=0;
+//            String line=scnr.nextLine();
+//            if(Character.isWhitespace(line.charAt(lineCount))){
+//                nums.add(0);
+//                lineCount+=2;
+//            }
+//            if(){
+//
+//            }
+//        }
         if(!scnr.hasNextInt()){
             throw new IllegalArgumentException();
         }
