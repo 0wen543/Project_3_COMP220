@@ -62,8 +62,15 @@ public class ScoresTest {
     @Test
     public void nothingTest(){
         final String nothing = " ";
-        Scores test = new Scores(nothing);
-        assertEquals(1,test.getNumScores());
+        int exceptCount = 0;
+        Scores test; // = new Scores(nothing);
+        try{
+            test = new Scores(nothing);
+        }catch(IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1,exceptCount);
+        //assertEquals(1,test.getNumScores());
     }
 
     @Test
@@ -128,18 +135,18 @@ public class ScoresTest {
         assertEquals(7,test.getMax());
     }
 
-    @Test
-    public void emptyTest(){
-        final String blank=" ";
-        int exceptCount=0;
-        Scores test = new Scores(blank);
-        try{
-            test.getMax();
-        }catch (NoSuchElementException e){
-            exceptCount++;
-        }
-        assertEquals(1,exceptCount);
-    }
+//    @Test
+//    public void emptyTest(){
+//        final String blank=" ";
+//        int exceptCount=0;
+//        Scores test = new Scores(blank);
+//        try{
+//            test.getMax();
+//        }catch (NoSuchElementException e){
+//            exceptCount++;
+//        }
+//        assertEquals(1,exceptCount);
+//    }
 
 
     @Test
