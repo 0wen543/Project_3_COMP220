@@ -13,9 +13,9 @@ public class ScoresTest {
         final String doubles = "0.45 22.22 3.67";
         int exceptCount=0;
         try{
-        Scores test = new Scores(doubles);
+            Scores test = new Scores(doubles);
         }catch (IllegalArgumentException e){
-        exceptCount++;
+            exceptCount++;
         }
         assertEquals(1,exceptCount);
     }
@@ -140,4 +140,64 @@ public class ScoresTest {
         }
         assertEquals(1,exceptCount);
     }
+
+
+    @Test
+    public void spaceFirstTest(){
+        final String spaceOne = "    1 2 3 4 5";
+        int exceptCount = 0;
+        try {
+            Scores spaceyScores = new Scores(spaceOne);
+        }catch (IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1, exceptCount);
+    }
+
+    @Test
+    public void spaceAfterTest(){
+        final String spaceAfter = "1         2 3 4 5";
+        int exceptCount = 0;
+        try {
+            Scores funkySpaces = new Scores(spaceAfter);
+        }catch (IllegalArgumentException e){
+            exceptCount++;
+        }
+        assertEquals(1, exceptCount);
+    }
+    @Test
+    public void oneGradeTest(){
+        final String oneGrade = "1";
+        Scores one = new Scores(oneGrade);
+        assertEquals(1, one.getNumScores());
+    }
+    @Test
+    public void letterTest(){
+        final String letterToo = "1 r 5";
+        int exceptCount = 0;
+        try {
+            Scores withLetter = new Scores(letterToo);
+        } catch(IllegalArgumentException e ){
+            exceptCount++;
+        }
+        assertEquals(1, exceptCount);
+    }
+    @Test
+    public void newLineTest(){
+        final String newLineToo = "1 2 3 \n 4 5 6";
+        int exceptCount = 0;
+        try {
+            Scores withNewLine = new Scores(newLineToo);
+        } catch(IllegalArgumentException e ){
+            exceptCount++;
+        }
+        assertEquals(1, exceptCount);
+    }
+    @Test
+    public void bigNumbersTest(){
+        final String bigNumbersToo = "12345 23456 34567 8 9 70123";
+        Scores withBig = new Scores(bigNumbersToo);
+        assertEquals(6, withBig.getNumScores());
+    }
+
 }
