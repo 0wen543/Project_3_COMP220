@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.util.NoSuchElementException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScoresTest {
@@ -206,5 +204,14 @@ public class ScoresTest {
         Scores withBig = new Scores(bigNumbersToo);
         assertEquals(6, withBig.getNumScores());
     }
+
+    @Test
+    public void allInt(){
+        final String integers = "8 73 834 32516";
+        Scores test = new Scores(integers);
+        assertEquals(test.get(3),test.getMax());
+    }
+    //added this to test functionality of getMax
+
 
 }
