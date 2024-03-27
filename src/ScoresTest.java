@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ScoresTest {
@@ -21,9 +23,7 @@ public class ScoresTest {
     @Test
     public void numScoreTest(){
         final String nums="6 3 87 12 65 53";
-
         Scores test = new Scores(nums);
-
         assertEquals(6,test.getNumScores());
     }
 
@@ -43,9 +43,7 @@ public class ScoresTest {
     @Test
     public void getTest(){
         final String nums ="4 5 6 7 7";
-
         Scores test = new Scores(nums);
-
         assertEquals(6, test.get(2));
     }
 
@@ -60,28 +58,15 @@ public class ScoresTest {
     @Test
     public void nothingTest(){
         final String nothing = " ";
-        int exceptCount = 0;
-        Scores test; // = new Scores(nothing);
-        try{
-            test = new Scores(nothing);
-        }catch(IllegalArgumentException e){
-            exceptCount++;
-        }
-        assertEquals(1,exceptCount);
-        //assertEquals(1,test.getNumScores());
+        Scores test = new Scores(nothing);
+        assertEquals(0,test.getNumScores());
     }
 
     @Test
     public void nonSpacedTest(){
-        final String noSpaces = "43568346176437014389690";
-        int exceptCount=0;
-        try {
-            Scores test = new Scores(noSpaces);
-        }
-        catch(IllegalArgumentException e){
-            exceptCount++;
-        }
-        assertEquals(1,exceptCount);
+        final String noSpaces = "435683461";
+        Scores test = new Scores(noSpaces);
+        assertEquals(1,test.getNumScores());
     }
 
     @Test
@@ -112,63 +97,18 @@ public class ScoresTest {
         }
         assertEquals(1,exceptCount);
     }
-
-
-    /*
-     * getMax() tests
-     */
-    @Test
-    public void sameTest(){
-        final String same ="4 4 4 4";
-
-        Scores test = new Scores(same);
-        assertEquals(4,test.getMax());
-    }
-
-    @Test
-    public void negativeMaxTest(){
-        final String negatives="-32 4 6 7";
-
-        Scores test = new Scores(negatives);
-        assertEquals(7,test.getMax());
-    }
-
-//    @Test
-//    public void emptyTest(){
-//        final String blank=" ";
-//        int exceptCount=0;
-//        Scores test = new Scores(blank);
-//        try{
-//            test.getMax();
-//        }catch (NoSuchElementException e){
-//            exceptCount++;
-//        }
-//        assertEquals(1,exceptCount);
-//    }
-
-
     @Test
     public void spaceFirstTest(){
         final String spaceOne = "    1 2 3 4 5";
-        int exceptCount = 0;
-        try {
-            Scores spaceyScores = new Scores(spaceOne);
-        }catch (IllegalArgumentException e){
-            exceptCount++;
-        }
-        assertEquals(1, exceptCount);
+        Scores spaceyScores = new Scores(spaceOne);
+        assertEquals(5,spaceyScores.getNumScores());
     }
 
     @Test
     public void spaceAfterTest(){
         final String spaceAfter = "1         2 3 4 5";
-        int exceptCount = 0;
-        try {
-            Scores funkySpaces = new Scores(spaceAfter);
-        }catch (IllegalArgumentException e){
-            exceptCount++;
-        }
-        assertEquals(1, exceptCount);
+        Scores funkySpaces = new Scores(spaceAfter);
+        assertEquals(5,funkySpaces.getNumScores());
     }
     @Test
     public void oneGradeTest(){
@@ -190,19 +130,45 @@ public class ScoresTest {
     @Test
     public void newLineTest(){
         final String newLineToo = "1 2 3 \n 4 5 6";
-        int exceptCount = 0;
-        try {
-            Scores withNewLine = new Scores(newLineToo);
-        } catch(IllegalArgumentException e ){
-            exceptCount++;
-        }
-        assertEquals(1, exceptCount);
+        Scores withNewLine = new Scores(newLineToo);
+        assertEquals(6,withNewLine.getNumScores());
     }
     @Test
     public void bigNumbersTest(){
         final String bigNumbersToo = "12345 23456 34567 8 9 70123";
         Scores withBig = new Scores(bigNumbersToo);
         assertEquals(6, withBig.getNumScores());
+    }
+
+    /*
+    getMax() tests
+     */
+    @Test
+    public void sameTest(){
+        final String same ="4 4 4 4";
+
+        Scores test = new Scores(same);
+        assertEquals(4,test.getMax());
+    }
+
+    @Test
+    public void negativeMaxTest(){
+        final String negatives="-32 4 6 7";
+        Scores test = new Scores(negatives);
+        assertEquals(7,test.getMax());
+    }
+
+    @Test
+    public void emptyTest(){
+        final String blank=" ";
+        int exceptCount=0;
+        Scores test = new Scores(blank);
+        try{
+            test.getMax();
+        }catch (NoSuchElementException e){
+            exceptCount++;
+        }
+        assertEquals(1,exceptCount);
     }
 
     @Test
@@ -221,26 +187,35 @@ public class ScoresTest {
     }
 
     @Test
-    public void allMaxLocations(){
+    public void startMaxLocations(){
         final String startMax="100 42 77 55 67";
-        final String midMax="55 67 100 42 89";
-        final String endMax="78 99 33 92 100";
         Scores testA = new Scores(startMax);
-        Scores testB = new Scores(midMax);
-        Scores testC = new Scores(endMax);
-
         int maxCheck=0;
         if (testA.getMax()==100){
             maxCheck++;
         }
+        assertEquals(1,maxCheck);
+
+    }
+    @Test
+    public void midMaxLocation(){
+        final String midMax="55 67 100 42 89";
+        Scores testB = new Scores(midMax);
+        int maxCheck=0;
         if (testB.getMax()==100){
             maxCheck++;
         }
+        assertEquals(1,maxCheck);
+    }
+    @Test
+    public void endMaxLocation(){
+        final String endMax="78 99 33 92 100";
+        Scores testC = new Scores(endMax);
+        int maxCheck=0;
         if (testC.getMax()==100){
             maxCheck++;
         }
-
-        assertEquals(3,maxCheck);
+        assertEquals(1,maxCheck);
     }
 
 }

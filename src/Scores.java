@@ -27,10 +27,16 @@ public class Scores {
 //            }
 //        }
         if(!scnr.hasNextInt()){
-           throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
         while(scnr.hasNextInt()){
             nums.add(scnr.nextInt());
+            if (!scnr.hasNext()){
+                break;
+            }
+            else if (!scnr.hasNextInt()){
+                throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -45,7 +51,7 @@ public class Scores {
      */
     public int get(int index) {
         if(index>=nums.size()||index<0){
-            throw new IndexOutOfBoundsException();
+            throw new ArrayIndexOutOfBoundsException();
         }
         return nums.get(index);
     }
@@ -68,4 +74,24 @@ public class Scores {
         }
         return maxNum;
     }
+    /**
+     * if all the grades are the same X
+     * if no grades                   X
+     * if out of bounds checking       X
+     * if the grades sent are doubles  X
+     * if the grades sent are punctuation  X
+     * if the grades sent are letters     X
+     * if the grades sent are negative     X
+     * if numbers are delimited by : or something else   X
+     * if there's space before the first grade   X
+     * if there's too much space in between X
+     *
+     * NEW tests(feel free to check my logic)
+     *
+     * if there's one grade
+     * if there's one letter, but the rest is a white space delimited list of ints
+     * if the grades sent have a new line in them
+     * if the grades sent are numbers with more than 4 digits
+     */
+
 }
