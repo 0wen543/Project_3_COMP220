@@ -45,7 +45,7 @@ public class Scores {
      */
     public int get(int index) {
         if(index>=nums.size()||index<0){
-            throw new ArrayIndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException();
         }
         return nums.get(index);
     }

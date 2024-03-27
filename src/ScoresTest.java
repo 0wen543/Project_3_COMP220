@@ -91,12 +91,12 @@ public class ScoresTest {
         Scores test = new Scores(outOfBound);
         try{
             test.get(8);
-        }catch(ArrayIndexOutOfBoundsException e){
+        }catch(IndexOutOfBoundsException e){
             exceptCount++;
         }
         try{
             test.get(-1);
-        }catch (ArrayIndexOutOfBoundsException e){
+        }catch (IndexOutOfBoundsException e){
             exceptCount++;
         }
         assertEquals(2,exceptCount);
@@ -213,5 +213,10 @@ public class ScoresTest {
     }
     //added tests to see if getMax will select a valid score on test
 
+    @Test
+    public void allIntCheck(){
+
+    }
+    //Should  test to see if every score was accounted for in getMax.
 
 }
