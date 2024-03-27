@@ -214,9 +214,33 @@ public class ScoresTest {
     //added tests to see if getMax will select a valid score on test
 
     @Test
-    public void allIntCheck(){
-
+    public void negativeGetMax(){
+        final String scores="-42 -2 -100";
+        Scores test = new Scores(scores);
+        assertEquals(0,test.getMax());
     }
-    //Should  test to see if every score was accounted for in getMax.
+
+    @Test
+    public void allMaxLocations(){
+        final String startMax="100 42 77 55 67";
+        final String midMax="55 67 100 42 89";
+        final String endMax="78 99 33 92 100";
+        Scores testA = new Scores(startMax);
+        Scores testB = new Scores(midMax);
+        Scores testC = new Scores(endMax);
+
+        int maxCheck=0;
+        if (testA.getMax()==100){
+            maxCheck++;
+        }
+        if (testB.getMax()==100){
+            maxCheck++;
+        }
+        if (testC.getMax()==100){
+            maxCheck++;
+        }
+
+        assertEquals(3,maxCheck);
+    }
 
 }
