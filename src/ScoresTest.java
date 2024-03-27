@@ -206,12 +206,12 @@ public class ScoresTest {
     }
 
     @Test
-    public void allInt(){
-        final String integers = "8 73 834 32516";
-        Scores test = new Scores(integers);
-        assertEquals(test.get(3),test.getMax());
+    public void fakeScores(){
+        final String scores = "8 73 834 32516";
+        Scores test = new Scores(scores);
+        assertEquals(73,test.getMax());
     }
-    //added this to test functionality of getMax
+    //added tests to see if getMax will select a valid score on test
 
 
 }
